@@ -92,4 +92,42 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("resize", updateLogoPosition);
 
     updateLogoPosition();
+
+    // ==============================
+    // Abous Us Home Page Slider
+    // ==============================
+
+    const carousel = document.getElementById("carousel");
+    const prevBtn = document.querySelector(".prev-btn");
+    const nextBtn = document.querySelector(".next-btn");
+
+    let scrollAmount = 0;
+    const cardWidth = 236; // card width + gap
+
+    // Clone slides for infinite effect
+    const galleryItems = Array.from(carousel.children);
+    galleryItems.forEach(item => {
+        const clone = item.cloneNode(true);
+        carousel.appendChild(clone);
+    });
+
+    function scrollNext() {
+        scrollAmount += cardWidth;
+        if (scrollAmount >= carousel.scrollWidth / 2) {
+            scrollAmount = 0;
+        }
+        carousel.style.transform = `translateX(-${scrollAmount}px)`;
+    }
+
+    function scrollPrev() {
+        scrollAmount -= cardWidth;
+        if (scrollAmount < 0) {
+            scrollAmount = (carousel.scrollWidth / 2) - cardWidth;
+        }
+        carousel.style.transform = `translateX(-${scrollAmount}px)`;
+    }
+
+    nextBtn.addEventListener("click", scrollNext);
+    prevBtn.addEventListener("click", scrollPrev);
+
 });
