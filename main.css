@@ -154,26 +154,32 @@ a {
     z-index: 200;
 }
 
-/* =========== LOGO (single element that moves) =========== */
+/* =========== LOGO (single element that moves & scales) =========== */
 #logo {
     position: fixed;
-    /* fixed so it can move smoothly relative to viewport */
+    /* stays relative to viewport for smooth animation */
     left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%);
-    /* initial centered in viewport */
-    width: 220px;
-    /* initial logo size on desktop */
-    max-width: 45vw;
+    /* centered vertically in hero initially */
+    transform: translate(-50%, -50%) scale(1);
+    /* scale will be animated in JS */
+    transform-origin: center center;
+    /* scaling from center */
+    width: 420px;
+    /* starting hero size */
+    max-width: 90vw;
+    /* responsive limit */
     height: auto;
     z-index: 1500;
-    transition: opacity 180ms linear;
+    transition: none;
+    /* we don't want a CSS transition — JS controls it */
     will-change: transform;
-    /* hint for performance */
+    /* GPU optimization */
     pointer-events: none;
-    /* allow clicks to pass through to slider controls */
+    /* clicks go through to slider controls */
     user-select: none;
 }
+
 
 /* When logo gets to header we slightly reduce pointer-events friction (still none) */
 .logo--snapped {
