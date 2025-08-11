@@ -237,6 +237,7 @@ a {
     /* don't block dots */
 }
 
+/* about us section */
 .more-than-home {
     background-color: #fff;
     padding: 4rem 0;
@@ -330,6 +331,8 @@ a {
     height: 100%;
     object-fit: cover;
 }
+
+/* Enquiry Pop up button */
 
 .open-form-btn {
     background-color: #fff;
@@ -440,5 +443,45 @@ a {
     to {
         opacity: 1;
         transform: scale(1);
+    }
+}
+
+/* Our vision */
+
+.image-text-section {
+    width: 100%;
+    padding: 100px 5%;
+    background: #f8f8f8;
+}
+
+.content-container {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.image-container {
+    flex: 1;
+}
+
+.image-container img {
+    width: 100%;
+    max-width: 500px;
+    display: block;
+}
+
+.text-container {
+    flex: 1;
+    opacity: 0;
+    /* start hidden */
+    transform: translateX(50px);
+}
+
+@media (max-width: 768px) {
+    .content-container {
+        flex-direction: column;
+        text-align: center;
     }
 }
