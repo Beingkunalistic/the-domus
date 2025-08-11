@@ -206,3 +206,14 @@ a {
         bottom: 20px;
     }
 }
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    /* dark overlay with 35% opacity */
+    z-index: 400;
+    /* above slides (default slides are ~z-index:auto) */
+    pointer-events: none;
+    /* don't block dots */
+}
