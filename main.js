@@ -130,4 +130,49 @@ document.addEventListener("DOMContentLoaded", () => {
     nextBtn.addEventListener("click", scrollNext);
     prevBtn.addEventListener("click", scrollPrev);
 
+    // ==============================
+    // Popup Form  
+    // ==============================
+
+    const openFormBtn = document.querySelector(".open-form-btn");
+    const popupOverlay = document.getElementById("popupOverlay");
+    const closePopup = document.getElementById("closePopup");
+
+    openFormBtn.addEventListener("click", () => {
+        popupOverlay.style.display = "flex";
+    });
+
+    closePopup.addEventListener("click", () => {
+        popupOverlay.style.display = "none";
+    });
+
+    popupOverlay.addEventListener("click", (e) => {
+        if (e.target === popupOverlay) {
+            popupOverlay.style.display = "none";
+        }
+    });
+
+    // Handle form submission without reloading the page.
+
+    document.getElementById("contactForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const formData = new FormData(this);
+
+        fetch(this.action, {
+            method: "POST",
+            body: formData
+        })
+            .then(response => response.text())
+            .then(data => {
+                if (data.trim() === "success") {
+                    alert("Message sent successfully!");
+                    this.reset();
+                } else {
+                    alert("Error sending message.");
+                }
+            })
+            .catch(err => alert("An error occurred: " + err));
+    });
+
 });
