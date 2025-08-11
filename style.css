@@ -1,0 +1,208 @@
+/* =========== Reset & helpers =========== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100%;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* =========== Header =========== */
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 72px;
+    /* header height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1200;
+    background: #723D00;
+    backdrop-filter: blur(6px);
+}
+
+.nav {
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.nav-left,
+.nav-right {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    list-style: none;
+}
+
+.nav a {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #fff;
+    opacity: 0.9;
+}
+
+/* The center slot where the logo will land — it's empty but used to compute target coordinates */
+.header-center-anchor {
+    width: 160px;
+    /* visual center width (optional) */
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    /* the logo is separate and sits on top */
+}
+
+/* =========== HERO / SLIDER =========== */
+.hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    /* full viewport banner */
+    overflow: hidden;
+    display: block;
+}
+
+/* Slider container that holds slides row */
+.slider {
+    position: absolute;
+    inset: 0;
+    /* fills hero */
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+}
+
+.slides {
+    display: flex;
+    width: 300%;
+    /* 3 slides => 3 * 100% */
+    height: 100%;
+    transition: transform 700ms cubic-bezier(.22, .9, .35, 1);
+}
+
+.slide {
+    flex: 0 0 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+}
+
+/* dots */
+.dots {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 36px;
+    display: flex;
+    gap: 8px;
+    z-index: 800;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    cursor: pointer;
+    transition: transform .18s ease, background .18s ease;
+}
+
+.dot.active {
+    background: white;
+    transform: scale(1.25);
+}
+
+/* A subtle dark overlay so white dots are visible on bright images */
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.06));
+    pointer-events: none;
+    z-index: 200;
+}
+
+/* =========== LOGO (single element that moves) =========== */
+#logo {
+    position: fixed;
+    /* fixed so it can move smoothly relative to viewport */
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    /* initial centered in viewport */
+    width: 220px;
+    /* initial logo size on desktop */
+    max-width: 45vw;
+    height: auto;
+    z-index: 1500;
+    transition: opacity 180ms linear;
+    will-change: transform;
+    /* hint for performance */
+    pointer-events: none;
+    /* allow clicks to pass through to slider controls */
+    user-select: none;
+}
+
+/* When logo gets to header we slightly reduce pointer-events friction (still none) */
+.logo--snapped {
+    pointer-events: none;
+}
+
+/* =========== Page content after hero =========== */
+.content {
+    min-height: 110vh;
+    padding: 140px 20px 80px;
+    /* padding top leaves space below fixed header */
+    max-width: 1000px;
+    margin: 0 auto;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #222;
+}
+
+/* =========== Responsive tweaks =========== */
+@media (max-width: 900px) {
+
+    .nav-left,
+    .nav-right {
+        display: none;
+    }
+
+    /* minimal mobile header */
+    .site-header {
+        height: 64px;
+    }
+
+    #logo {
+        width: 160px;
+    }
+}
+
+@media (max-width: 520px) {
+    #logo {
+        width: 120px;
+    }
+
+    .dots {
+        bottom: 20px;
+    }
+}
