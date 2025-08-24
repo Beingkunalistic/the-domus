@@ -88,19 +88,25 @@ a {
 }
 
 .slides {
-    display: flex;
+    position: relative;
+    width: 100%;
     height: 100%;
-    transition: transform 1s cubic-bezier(0.83, 0, 0.17, 1);
-    /* smoother easing */
-    will-change: transform;
+    overflow: hidden;
 }
 
 .slide {
-    flex: 0 0 100%;
-    height: 100%;
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    /* fade effect */
     background-size: cover;
     background-position: center;
-    position: relative;
+}
+
+.slide.active {
+    opacity: 1;
+    z-index: 1;
 }
 
 /* optional fade overlay between slide changes */
@@ -297,7 +303,7 @@ a {
 
 .carousel-controls button {
     background: transparent;
-    color: white;
+    color: #660F09;
     border: none;
     padding: 0 0.5rem;
     border-radius: 50%;
@@ -308,7 +314,7 @@ a {
 .carousel-container {
     overflow: hidden;
     position: relative;
-    background-color: #660F09;
+    background-color: white;
     padding: 2rem 5rem 5rem 8rem;
 }
 
@@ -488,7 +494,7 @@ a {
 
 /* footer  */
 .site-footer {
-    background: #1F0003;
+    background: #723D01;
     color: #fff;
     padding: 60px 20px 30px;
     font-family: 'Arial', sans-serif;
@@ -583,4 +589,120 @@ a {
 
 .footer-socials a:hover svg {
     fill: #fff;
+}
+
+/* .about-section {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 8%;
+    background: #fff;
+}
+
+.about-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    gap: 2rem;
+}
+
+.about-text {
+    flex: 1.5;
+    max-width: 600px;
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+
+.about-text h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.about-shape {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    position: relative;
+}
+
+.rotated-shape {
+    opacity: 0.08;
+    width: 500px;
+    transform: translateX(150%);
+    transition: all 1.5s ease;
+}
+
+.about-section.active .rotated-shape {
+    transform: translateX(60%) rotate(-21deg);
+    opacity: 0.1;
+}
+
+.about-text p {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+}
+
+.about-text p.visible {
+    opacity: 1;
+    transform: translateY(0);
+}  */
+.about-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 8%;
+    background: #fff;
+    overflow: hidden;
+}
+
+.about-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    gap: 2rem;
+}
+
+.about-text {
+    position: relative;
+    flex: 1.5;
+    max-width: 600px;
+}
+
+.text-set {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.about-text h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.about-shape {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    position: relative;
+}
+
+.rotated-shape {
+    width: 500px;
+    opacity: 0;
+    /* handled by GSAP */
+    transform: translateX(100%);
+    /* offscreen initially */
 }

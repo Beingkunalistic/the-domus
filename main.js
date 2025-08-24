@@ -2,17 +2,16 @@ document.addEventListener("DOMContentLoaded", () => {
     /* ==============================
        HERO SLIDER
     ============================== */
-    const slidesContainer = document.querySelector(".slides");
-    const slideElements = document.querySelectorAll(".slide");
+    const slides = document.querySelectorAll(".slide");
     const dotsContainer = document.getElementById("dots");
 
     let currentSlide = 0;
-    const totalSlides = slideElements.length;
-    const slideDuration = 5000; // ms
+    const totalSlides = slides.length;
+    const slideDuration = 5000; // 5 seconds
     let slideInterval;
 
     // Create navigation dots dynamically
-    slideElements.forEach((_, index) => {
+    slides.forEach((_, index) => {
         const dot = document.createElement("span");
         dot.classList.add("dot");
         if (index === 0) dot.classList.add("active");
@@ -22,36 +21,26 @@ document.addEventListener("DOMContentLoaded", () => {
     const dots = document.querySelectorAll(".dot");
 
     function goToSlide(index) {
-        // Start overlay fade
-        slidesContainer.classList.add("changing");
+        slides[currentSlide].classList.remove("active");
+        dots[currentSlide].classList.remove("active");
 
-        setTimeout(() => {
-            currentSlide = index;
-            updateSlidePosition();
-            updateDots();
-            slidesContainer.classList.remove("changing");
-        }, 300); // matches your CSS fade duration
-    }
+        currentSlide = index;
 
-    function updateSlidePosition() {
-        slidesContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
-    }
-
-    function updateDots() {
-        dots.forEach((dot, idx) => {
-            dot.classList.toggle("active", idx === currentSlide);
-        });
+        slides[currentSlide].classList.add("active");
+        dots[currentSlide].classList.add("active");
     }
 
     function nextSlide() {
         goToSlide((currentSlide + 1) % totalSlides);
     }
 
-    function startSlideShow() {
+    function startSlideshow() {
         slideInterval = setInterval(nextSlide, slideDuration);
     }
 
-    startSlideShow();
+    // Start slideshow
+    startSlideshow();
+
 
     /* ==============================
        LOGO SCROLL SCALE ANIMATION

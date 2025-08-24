@@ -12,16 +12,16 @@
     <!-- Fixed Header -->
     <header class="site-header" id="site-header">
         <nav class="nav" role="navigation" aria-label="Main navigation">
-            <!-- <ul class="nav-left">
-            </ul> -->
+            <ul class="nav-left">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <button class="open-form-btn">Enquire Now</button>
+            </ul>
 
             <!-- center anchor (empty visually) - used as landing position -->
             <div class="header-center-anchor" id="header-anchor" aria-hidden="true"></div>
 
             <ul class="nav-right">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <button class="open-form-btn">Enquire Now</button>
             </ul>
         </nav>
     </header>
@@ -51,20 +51,63 @@
             <img id="logo" src="assets/logo-bnw.png" alt="Site logo" />
         </section>
 
+
+        <section class="about-section">
+            <div class="about-inner">
+                <!-- Text Content -->
+                <div class="about-text">
+                    <div class="text-set">
+                        <h2>About Us</h2>
+                        <p>
+                           "More Than a Home" - At The Domus, we don’t just develop real estate — we shape environments that reflect inner
+                            clarity, quiet confidence, and timeless design. Rooted in the classical idea of Domus — the
+                            Latin word for home — our spaces are more than dwellings. They are intentional sanctuaries
+                            built from the inside out. Every project is crafted with precision, purpose, and respect for
+                            those who will call it home. From spatial flow and materiality to light, texture, and
+                            structural integrity — every element speaks to our belief that true luxury lies in
+                            thoughtfulness, not excess. Founded by professionals with a legacy of trust since 1995, The
+                            Domus stands at the intersection of architecture and emotion. We collaborate with some of
+                            the industry’s finest consultants and craftsmen to ensure that every structure we deliver is
+                            not just built to last, but built to belong. Whether it’s a serene low-density development
+                            or a vibrant ultra-luxury residence, our spaces are designed to grow with you — not just on
+                            you.
+                        </p>
+                    </div>
+                    <div class="text-set">
+                        <h2>Our Vision</h2>
+                        <p>
+                            We envision homes that not only shelter but inspire, offering harmony
+                            between architecture and human experience.
+                        </p>
+                    </div>
+                    <div class="text-set">
+                        <h2>Our Promise</h2>
+                        <p>
+                            Every project we create is rooted in timeless quality, with details that
+                            stand strong across generations.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Decorative Shape -->
+                <div class="about-shape">
+                    <img src="assets/LOGO COLOUR Final@300x.png" alt="Decorative Shape" class="rotated-shape" />
+                </div>
+            </div>
+        </section>
+
+
+
         <!-- More Than a Home Section -->
         <section class="more-than-home">
             <div class="container">
                 <div class="header-row">
                     <div class="text-content">
-                        <h2 class="heading">More Than a Home.</h2>
+                        <h2 class="heading"></h2>
                         <p class="description">
-                            At The Domus, <strong><em>design goes beyond walls</em></strong> — it’s about space that
-                            listens,
-                            light that welcomes, and details that endure. Rooted in timeless aesthetics and built with
-                            precision, <strong><em>we craft homes that feel like they were always meant to be
-                                    yours.</em></strong>
+
                         </p>
-                        <a href="#" class="read-more-btn">READ MORE</a>
+                        <!-- <a href="#" class="read-more-btn">READ MORE</a> -->
                     </div>
                 </div>
             </div>
@@ -83,7 +126,7 @@
             </div>
         </section>
 
-        <section class="image-text-section">
+        <!-- <section class="image-text-section">
             <div class="content-container">
                 <div class="image-container">
                     <img src="assets/LOGO COLOUR Final@300x.png" alt="The Domus" class="rolling-image">
@@ -99,7 +142,7 @@
                     </p>
                 </div>
             </div>
-        </section>
+        </section> -->
 
         <!-- Popup Overlay -->
         <div class="popup-overlay" id="popupOverlay">
@@ -141,38 +184,36 @@
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
-        // Image scroll-linked rolling animation
-        gsap.fromTo(".rolling-image",
-            { x: "-150%", rotation: 0 }, // starting position off-screen
-            {
-                x: "0%",
-                rotation: 360, // adjust this for the roation speed
-                ease: "none", // tied to scroll, no easing
-                scrollTrigger: {
-                    trigger: ".image-text-section",
-                    start: "top 80%",
-                    end: "top 20%",
-                    scrub: true // makes it scroll-linked
-                }
-            }
-        );
+        const textSets = document.querySelectorAll(".text-set");
 
-        // Text animation with longer delay
-        gsap.fromTo(".text-container",
-            { opacity: 0, x: 50 },
-            {
-                opacity: 1,
-                x: 0,
-                duration: 1.2,
-                ease: "power3.out",
-                scrollTrigger: {
-                    trigger: ".image-text-section",
-                    start: "top 50%", // starts later
-                    end: "top 30%",
-                    scrub: true
-                }
+        let tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".about-section",
+                start: "top top",
+                end: "+=3000", // adjust scroll distance
+                scrub: true,
+                pin: true,
             }
-        );
+        });
+
+        // animate the image once at the start
+        tl.to(".rotated-shape", {
+            x: "60%",
+            opacity: 0.1,
+            rotate: -21,
+            duration: 2,
+            ease: "power2.out"
+        }, 0); // start at the same time as timeline begins
+
+        // animate each text sequentially
+        textSets.forEach((set, i) => {
+            tl.to(set, { opacity: 1, y: 0, duration: 1 });
+
+            // fade out if it's NOT the last one
+            if (i < textSets.length - 1) {
+                tl.to(set, { opacity: 0, y: -30, duration: 1 }, "+=1");
+            }
+        });
     </script>
 
 
