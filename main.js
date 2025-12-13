@@ -234,3 +234,103 @@ const observer = new IntersectionObserver((entries) => {
 });
 
 observer.observe(document.querySelector('.stats-banner'));
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const aboutSection = document.querySelector(".about-section");
+
+    if (!aboutSection) return;
+
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    aboutSection.classList.add("animate");
+                    observer.unobserve(aboutSection); // run only once
+                }
+            });
+        },
+        {
+            threshold: 0.3
+        }
+    );
+
+    observer.observe(aboutSection);
+});
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const gallerySection = document.querySelector(".gallery-section");
+
+    if (!gallerySection) return;
+
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    gallerySection.classList.add("animate");
+                    observer.unobserve(gallerySection); // animate only once
+                }
+            });
+        },
+        {
+            threshold: 0.3
+        }
+    );
+
+    observer.observe(gallerySection);
+});
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const statsSection = document.querySelector(".stats-banner");
+    const counterEl = document.getElementById("counter");
+
+    if (!statsSection || !counterEl) return;
+
+    let hasAnimated = false;
+
+    const animateCounter = (target, duration = 1200) => {
+        let start = 0;
+        const startTime = performance.now();
+
+        const update = (currentTime) => {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const value = Math.floor(progress * target);
+
+            counterEl.textContent = value;
+
+            if (progress < 1) {
+                requestAnimationFrame(update);
+            } else {
+                counterEl.textContent = target;
+            }
+        };
+
+        requestAnimationFrame(update);
+    };
+
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !hasAnimated) {
+                    hasAnimated = true;
+
+                    // Section animation
+                    statsSection.classList.add("animate");
+
+                    // Counter animation
+                    animateCounter(2000); // 👈 change number here if needed
+
+                    observer.unobserve(statsSection);
+                }
+            });
+        },
+        {
+            threshold: 0.4
+        }
+    );
+
+    observer.observe(statsSection);
+});
