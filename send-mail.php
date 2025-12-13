@@ -1,39 +1,29 @@
 <?php
-require 'phpmailer/src/Exception.php';
-require 'phpmailer/src/PHPMailer.php';
-require 'phpmailer/src/SMTP.php';
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-// Set your email address here
-$to = "kkapoor2604@gmail.com";
+    $first  = $_POST['first_name'];
+    $last   = $_POST['last_name'];
+    $phone  = $_POST['phone'];
+    $email  = $_POST['email'];
+    $msg    = $_POST['message'];
 
-// Sanitize inputs
-$name    = htmlspecialchars(trim($_POST['name']));
-$phone   = htmlspecialchars(trim($_POST['phone']));
-$email   = filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL);
-$message = htmlspecialchars(trim($_POST['message']));
+    $to = "kkapoor2604@gmail.com";
+    $subject = "New Contact Form Submission";
 
-// Validate email
-if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    die("Invalid email format");
-}
+    $body = "
+    Name: $first $last
+    Phone: $phone
+    Email: $email
+    Message:
+    $msg
+    ";
 
-// Email subject & body
-$subject = "New Contact Form Submission";
-$body = "
-Name: $name
-Phone: $phone
-Email: $email
-Message:
-$message
-";
+    $headers = "From: noreply@yourdomain.com\r\n";
+    $headers .= "Reply-To: $email\r\n";
 
-// Headers
-$headers = "From: $name <$email>\r\n";
-$headers .= "Reply-To: $email\r\n";
-
-// Send mail
-if (mail($to, $subject, $body, $headers)) {
-    echo "success";
-} else {
-    echo "error";
+    if (mail($to, $subject, $body, $headers)) {
+        echo "success";
+    } else {
+        echo "error";
+    }
 }

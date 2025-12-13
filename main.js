@@ -165,3 +165,72 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 });
+document.addEventListener("DOMContentLoaded", () => {
+    const ham = document.querySelector(".hamburger");
+    const mobileMenu = document.querySelector(".mobile-menu");
+    const mobileClose = document.querySelector(".mobile-close");
+
+    ham.addEventListener("click", () => {
+        ham.classList.toggle("active");
+        mobileMenu.classList.toggle("open");
+        ham.style.display = "none";
+    });
+
+    mobileClose.addEventListener("click", () => {
+        ham.classList.remove("active");
+        mobileMenu.classList.remove("open");
+        ham.style.display = "flex";
+    });
+});
+const carousel = document.getElementById('galleryCarousel');
+const nextBtn = document.getElementById('galleryNext');
+const prevBtn = document.getElementById('galleryPrev');
+
+let index = 0;
+
+function updateCarousel() {
+    const slideWidth = carousel.children[0].offsetWidth + 40; // slide + gap
+    carousel.style.transform = `translateX(-${index * slideWidth}px)`;
+}
+
+nextBtn.addEventListener('click', () => {
+    if (index < carousel.children.length - 3) {
+        index++;
+        updateCarousel();
+    }
+});
+
+prevBtn.addEventListener('click', () => {
+    if (index > 0) {
+        index--;
+        updateCarousel();
+    }
+});
+
+window.addEventListener('resize', updateCarousel);
+
+const counterEl = document.getElementById('counter');
+let start = 0;
+const end = 2000;  // final number
+const duration = 1200; // ms
+const step = end / (duration / 16);
+
+function runCounter() {
+    start += step;
+    if (start < end) {
+        counterEl.innerText = Math.floor(start);
+        requestAnimationFrame(runCounter);
+    } else {
+        counterEl.innerText = end;
+    }
+}
+
+// Run when section becomes visible
+const observer = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+        runCounter();
+        observer.disconnect();
+    }
+});
+
+observer.observe(document.querySelector('.stats-banner'));
