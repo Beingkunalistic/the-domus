@@ -378,8 +378,8 @@ a {
     align-items: center;
     padding: 20px 0;
     width: 100vw;
-    height: 90vh;
-    overflow: visible;
+    height: 100vh;
+    overflow: hidden;
 }
 
 /* ---------------- VERTICAL LEFT TEXT ---------------- */
