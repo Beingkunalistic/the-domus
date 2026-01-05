@@ -334,3 +334,70 @@ document.addEventListener("DOMContentLoaded", () => {
 
     observer.observe(statsSection);
 });
+document.addEventListener("DOMContentLoaded", () => {
+    const slides = document.querySelectorAll('.slide');
+    const prev = document.querySelector('.prev');
+    const next = document.querySelector('.next');
+    let index = 1;
+
+    function render() {
+        slides.forEach((slide, i) => {
+            slide.className = 'slide';
+            if (i === index) slide.classList.add('active');
+            if (i === index - 1) slide.classList.add('prev');
+            if (i === index + 1) slide.classList.add('next');
+        });
+    }
+
+    next.onclick = () => {
+        index = (index + 1) % slides.length;
+        render();
+    };
+
+    prev.onclick = () => {
+        index = (index - 1 + slides.length) % slides.length;
+        render();
+    };
+
+    slides.forEach((slide, i) => {
+        slide.onclick = () => {
+            index = i;
+            render();
+        };
+    });
+
+    render();
+});
+document.addEventListener("DOMContentLoaded", () => {
+    const cards = document.querySelectorAll('.carousel-card');
+    const prevBtn = document.querySelector('.carousel-btn.prev');
+    const nextBtn = document.querySelector('.carousel-btn.next');
+
+    let activeIndex = 1;
+
+    function updateCarousel() {
+        cards.forEach((card, index) => {
+            card.classList.remove('prev', 'active', 'next');
+
+            if (index === activeIndex) {
+                card.classList.add('active');
+            } else if (index === activeIndex - 1) {
+                card.classList.add('prev');
+            } else if (index === activeIndex + 1) {
+                card.classList.add('next');
+            }
+        });
+    }
+
+    nextBtn.addEventListener('click', () => {
+        activeIndex = (activeIndex + 1) % cards.length;
+        updateCarousel();
+    });
+
+    prevBtn.addEventListener('click', () => {
+        activeIndex = (activeIndex - 1 + cards.length) % cards.length;
+        updateCarousel();
+    });
+
+    updateCarousel();
+});
