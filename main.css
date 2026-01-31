@@ -1737,3 +1737,191 @@ textarea {
     /* position: absolute; */
 
 }
+
+/* Initial state */
+.hero-content {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: heroFadeUp 0.9s ease-out forwards;
+    animation-delay: 0.2s;
+}
+
+/* Optional stagger */
+.hero-eyebrow {
+    animation-delay: 0.2s;
+}
+
+.hero-title {
+    animation-delay: 0.35s;
+}
+
+.sub-title {
+    animation-delay: 0.5s;
+}
+
+/* Animation */
+@keyframes heroFadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Apply animation to children (staggered fade) */
+.hero-eyebrow,
+.hero-title,
+.sub-title {
+    display: block;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: heroFadeUp 0.9s ease-out forwards;
+}
+
+/* INITIAL STATE */
+.about-vertical2,
+.about-visual2 {
+    opacity: 0;
+    transform: translateX(-60px);
+    animation: fadeSlideLeft 0.9s ease-out forwards;
+}
+
+.about-content2 {
+    opacity: 0;
+    transform: translateX(60px);
+    animation: fadeSlideRight 0.9s ease-out forwards;
+}
+
+/* DELAYS */
+.about-vertical2 {
+    animation-delay: 1s;
+}
+
+.about-visual2 {
+    animation-delay: 1s;
+}
+
+.about-content2 {
+    animation-delay: 1s;
+}
+
+/* KEYFRAMES */
+@keyframes fadeSlideLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-60px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeSlideRight {
+    from {
+        opacity: 0;
+        transform: translateX(60px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* ------------------------------
+   INITIAL STATE
+--------------------------------*/
+
+/* LEFT SIDE */
+.property-left {
+    opacity: 0;
+    transform: translateX(-60px);
+    animation: propertyFadeLeft 0.9s ease-out forwards;
+    animation-delay: 2s;
+}
+
+/* RIGHT SIDE */
+.property-right {
+    opacity: 0;
+    transform: translateX(60px);
+    animation: propertyFadeRight 0.9s ease-out forwards;
+    animation-delay: 2s;
+}
+
+/* ------------------------------
+   KEYFRAMES
+--------------------------------*/
+
+@keyframes propertyFadeLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-60px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes propertyFadeRight {
+    from {
+        opacity: 0;
+        transform: translateX(60px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* INITIAL STATE */
+.amenities-center {
+    opacity: 0;
+    transform: translateY(60px);
+    animation: fadeSlideUp 0.9s ease-out forwards;
+    animation-delay: 0.4s;
+}
+
+/* OPTIONAL: stagger each card */
+.amenity-card {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeSlideUp 0.8s ease-out forwards;
+}
+
+.amenity-card:nth-child(1) {
+    animation-delay: 3s;
+}
+
+.amenity-card:nth-child(2) {
+    animation-delay: 3.5s;
+}
+
+.amenity-card:nth-child(3) {
+    animation-delay: 3.7s;
+}
+
+.amenity-card:nth-child(4) {
+    animation-delay: 3.9s;
+}
+
+/* KEYFRAMES */
+@keyframes fadeSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(60px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
