@@ -260,7 +260,7 @@ a {
 .hero-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.3);
     /* dark overlay with 35% opacity */
     z-index: 400;
     /* above slides (default slides are ~z-index:auto) */
@@ -314,7 +314,7 @@ a {
 /* MOBILE MENU */
 .mobile-menu {
     position: fixed;
-    top: 0;
+    top: -14px;
     left: -100%;
     width: 380px;
     height: 100vh;
@@ -326,7 +326,7 @@ a {
 }
 
 .mobile-menu.open {
-    left: 0;
+    left: -11%;
 }
 
 .mobile-menu ul {
