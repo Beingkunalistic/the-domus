@@ -1,403 +1,257 @@
-document.addEventListener("DOMContentLoaded", () => {
-    /* ==============================
-       HERO SLIDER
-    ============================== */
-    const slides = document.querySelectorAll(".slide");
-    const dotsContainer = document.getElementById("dots");
+/* ==============================
+   HELPERS
+============================== */
+const $ = (sel, scope = document) => scope.querySelector(sel);
+const $$ = (sel, scope = document) => [...scope.querySelectorAll(sel)];
 
-    let currentSlide = 0;
-    const totalSlides = slides.length;
-    const slideDuration = 5000; // 5 seconds
-    let slideInterval;
+/* ==============================
+   HERO SLIDER
+============================== */
+function initHeroSlider() {
+    const slides = $$(".slide");
+    const dotsContainer = $("#dots");
 
-    // Create navigation dots dynamically
-    slides.forEach((_, index) => {
+    if (!slides.length || !dotsContainer) return;
+
+    let current = 0;
+    const duration = 5000;
+
+    slides.forEach((_, i) => {
         const dot = document.createElement("span");
-        dot.classList.add("dot");
-        if (index === 0) dot.classList.add("active");
-        dot.addEventListener("click", () => goToSlide(index));
+        dot.className = "dot" + (i === 0 ? " active" : "");
+        dot.addEventListener("click", () => goTo(i));
         dotsContainer.appendChild(dot);
     });
-    const dots = document.querySelectorAll(".dot");
 
-    function goToSlide(index) {
-        slides[currentSlide].classList.remove("active");
-        dots[currentSlide].classList.remove("active");
+    const dots = $$(".dot", dotsContainer);
 
-        currentSlide = index;
-
-        slides[currentSlide].classList.add("active");
-        dots[currentSlide].classList.add("active");
+    function goTo(i) {
+        slides[current].classList.remove("active");
+        dots[current].classList.remove("active");
+        current = i;
+        slides[current].classList.add("active");
+        dots[current].classList.add("active");
     }
 
-    function nextSlide() {
-        goToSlide((currentSlide + 1) % totalSlides);
-    }
+    setInterval(() => goTo((current + 1) % slides.length), duration);
+}
 
-    function startSlideshow() {
-        slideInterval = setInterval(nextSlide, slideDuration);
-    }
+/* ==============================
+   LOGO SCROLL SCALE
+============================== */
+function initLogoScroll() {
+    const logo = $("#logo");
+    const hero = $("#hero");
+    const header = $("header");
 
-    // Start slideshow
-    startSlideshow();
+    if (!logo || !hero || !header) return;
 
+    const maxWidth = 420;
+    const minWidth = 240;
 
-    /* ==============================
-       LOGO SCROLL SCALE ANIMATION
-    ============================== */
-    const logo = document.getElementById("logo");
-    const hero = document.getElementById("hero");
-    const header = document.querySelector("header");
-
-    const maxWidth = 420; // px (hero size)
-    const minWidth = 240; // px (header size)
-
-    function updateLogoPosition() {
+    function update() {
         const heroRect = hero.getBoundingClientRect();
         const headerHeight = header.offsetHeight;
 
-        // Move only until halfway through hero
-        const triggerDistance = heroRect.height / 2 - headerHeight;
-        let progress = Math.min(Math.max((0 - heroRect.top) / triggerDistance, 0), 1);
+        const trigger = heroRect.height / 2 - headerHeight;
+        let progress = Math.min(Math.max(-heroRect.top / trigger, 0), 1);
+        progress = 1 - Math.pow(1 - progress, 2);
 
-        // Smooth easing
-        progress = 1 - Math.pow(1 - progress, 2); // easeOutQuad
-
-        // Scale factor
         const scale = (minWidth / maxWidth - 1) * progress + 1;
-
-        // Vertical position shift
-        const heroCenterY = heroRect.height / 2;
-        const headerCenterY =
-            headerHeight / 2 + header.getBoundingClientRect().top;
-        const translateY = (headerCenterY - heroCenterY) * progress;
-
-        logo.style.transform = `translate(-50%, calc(-50% + ${translateY}px)) scale(${scale})`;
+        logo.style.transform = `translate(-50%, -50%) scale(${scale})`;
     }
 
-    window.addEventListener("scroll", () => {
-        requestAnimationFrame(updateLogoPosition);
-    });
-    window.addEventListener("resize", updateLogoPosition);
+    window.addEventListener("scroll", () => requestAnimationFrame(update));
+    window.addEventListener("resize", update);
+    update();
+}
 
-    updateLogoPosition();
+/* ==============================
+   ABOUT US CAROUSEL
+============================== */
+function initAboutCarousel() {
+    const carousel = $("#carousel");
+    const next = $(".next-btn");
+    const prev = $(".prev-btn");
 
-    // ==============================
-    // Abous Us Home Page Slider
-    // ==============================
+    if (!carousel || !next || !prev) return;
 
-    const carousel = document.getElementById("carousel");
-    const prevBtn = document.querySelector(".prev-btn");
-    const nextBtn = document.querySelector(".next-btn");
+    let offset = 0;
+    const cardWidth = 236;
 
-    let scrollAmount = 0;
-    const cardWidth = 236; // card width + gap
-
-    // Clone slides for infinite effect
-    const galleryItems = Array.from(carousel.children);
-    galleryItems.forEach(item => {
-        const clone = item.cloneNode(true);
-        carousel.appendChild(clone);
+    next.addEventListener("click", () => {
+        offset += cardWidth;
+        carousel.style.transform = `translateX(-${offset}px)`;
     });
 
-    function scrollNext() {
-        scrollAmount += cardWidth;
-        if (scrollAmount >= carousel.scrollWidth / 2) {
-            scrollAmount = 0;
-        }
-        carousel.style.transform = `translateX(-${scrollAmount}px)`;
-    }
-
-    function scrollPrev() {
-        scrollAmount -= cardWidth;
-        if (scrollAmount < 0) {
-            scrollAmount = (carousel.scrollWidth / 2) - cardWidth;
-        }
-        carousel.style.transform = `translateX(-${scrollAmount}px)`;
-    }
-
-    nextBtn.addEventListener("click", scrollNext);
-    prevBtn.addEventListener("click", scrollPrev);
-
-    // ==============================
-    // Popup Form  
-    // ==============================
-
-    const openFormBtn = document.querySelector(".open-form-btn");
-    const popupOverlay = document.getElementById("popupOverlay");
-    const closePopup = document.getElementById("closePopup");
-
-    openFormBtn.addEventListener("click", () => {
-        popupOverlay.style.display = "flex";
+    prev.addEventListener("click", () => {
+        offset = Math.max(offset - cardWidth, 0);
+        carousel.style.transform = `translateX(-${offset}px)`;
     });
+}
 
-    closePopup.addEventListener("click", () => {
-        popupOverlay.style.display = "none";
-    });
+/* ==============================
+   POPUP FORM
+============================== */
+function initPopupForm() {
+    const openBtn = $(".open-form-btn");
+    const overlay = $("#popupOverlay");
+    const closeBtn = $("#closePopup");
+    const form = $("#contactForm");
 
-    popupOverlay.addEventListener("click", (e) => {
-        if (e.target === popupOverlay) {
-            popupOverlay.style.display = "none";
-        }
-    });
+    if (!openBtn || !overlay || !closeBtn) return;
 
-    // Handle form submission without reloading the page.
+    openBtn.onclick = () => overlay.style.display = "flex";
+    closeBtn.onclick = () => overlay.style.display = "none";
+    overlay.onclick = e => e.target === overlay && (overlay.style.display = "none");
 
-    document.getElementById("contactForm").addEventListener("submit", function (e) {
+    if (!form) return;
+
+    form.addEventListener("submit", e => {
         e.preventDefault();
-
-        const formData = new FormData(this);
-
-        fetch(this.action, {
-            method: "POST",
-            body: formData
-        })
-            .then(response => response.text())
-            .then(data => {
-                if (data.trim() === "success") {
-                    alert("Message sent successfully!");
-                    this.reset();
-                } else {
-                    alert("Error sending message.");
-                }
-            })
-            .catch(err => alert("An error occurred: " + err));
+        fetch(form.action, { method: "POST", body: new FormData(form) })
+            .then(r => r.text())
+            .then(() => form.reset())
+            .catch(() => alert("Error submitting form"));
     });
+}
 
-});
-document.addEventListener("DOMContentLoaded", () => {
-    const ham = document.querySelector(".hamburger");
-    const mobileMenu = document.querySelector(".mobile-menu");
-    const mobileClose = document.querySelector(".mobile-close");
+/* ==============================
+   MOBILE MENU
+============================== */
+function initMobileMenu() {
+    const ham = $(".hamburger");
+    const menu = $(".mobile-menu");
+    const close = $(".mobile-close");
 
-    ham.addEventListener("click", () => {
-        ham.classList.toggle("active");
-        mobileMenu.classList.toggle("open");
+    if (!ham || !menu || !close) return;
+
+    ham.onclick = () => {
+        ham.classList.add("active");
+        menu.classList.add("open");
         ham.style.display = "none";
-    });
-
-    mobileClose.addEventListener("click", () => {
-        ham.classList.remove("active");
-        mobileMenu.classList.remove("open");
-        ham.style.display = "flex";
-    });
-});
-const carousel = document.getElementById('galleryCarousel');
-const nextBtn = document.getElementById('galleryNext');
-const prevBtn = document.getElementById('galleryPrev');
-
-let index = 0;
-
-function updateCarousel() {
-    const slideWidth = carousel.children[0].offsetWidth + 40; // slide + gap
-    carousel.style.transform = `translateX(-${index * slideWidth}px)`;
-}
-
-nextBtn.addEventListener('click', () => {
-    if (index < carousel.children.length - 3) {
-        index++;
-        updateCarousel();
-    }
-});
-
-prevBtn.addEventListener('click', () => {
-    if (index > 0) {
-        index--;
-        updateCarousel();
-    }
-});
-
-window.addEventListener('resize', updateCarousel);
-
-const counterEl = document.getElementById('counter');
-let start = 0;
-const end = 2000;  // final number
-const duration = 1200; // ms
-const step = end / (duration / 16);
-
-function runCounter() {
-    start += step;
-    if (start < end) {
-        counterEl.innerText = Math.floor(start);
-        requestAnimationFrame(runCounter);
-    } else {
-        counterEl.innerText = end;
-    }
-}
-
-// Run when section becomes visible
-const observer = new IntersectionObserver((entries) => {
-    if (entries[0].isIntersecting) {
-        runCounter();
-        observer.disconnect();
-    }
-});
-
-observer.observe(document.querySelector('.stats-banner'));
-
-
-document.addEventListener("DOMContentLoaded", () => {
-    const aboutSection = document.querySelector(".about-section");
-
-    if (!aboutSection) return;
-
-    const observer = new IntersectionObserver(
-        (entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    aboutSection.classList.add("animate");
-                    observer.unobserve(aboutSection); // run only once
-                }
-            });
-        },
-        {
-            threshold: 0.3
-        }
-    );
-
-    observer.observe(aboutSection);
-});
-
-
-document.addEventListener("DOMContentLoaded", () => {
-    const gallerySection = document.querySelector(".gallery-section");
-
-    if (!gallerySection) return;
-
-    const observer = new IntersectionObserver(
-        (entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    gallerySection.classList.add("animate");
-                    observer.unobserve(gallerySection); // animate only once
-                }
-            });
-        },
-        {
-            threshold: 0.3
-        }
-    );
-
-    observer.observe(gallerySection);
-});
-
-
-document.addEventListener("DOMContentLoaded", () => {
-    const statsSection = document.querySelector(".stats-banner");
-    const counterEl = document.getElementById("counter");
-
-    if (!statsSection || !counterEl) return;
-
-    let hasAnimated = false;
-
-    const animateCounter = (target, duration = 1200) => {
-        let start = 0;
-        const startTime = performance.now();
-
-        const update = (currentTime) => {
-            const elapsed = currentTime - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            const value = Math.floor(progress * target);
-
-            counterEl.textContent = value;
-
-            if (progress < 1) {
-                requestAnimationFrame(update);
-            } else {
-                counterEl.textContent = target;
-            }
-        };
-
-        requestAnimationFrame(update);
     };
 
-    const observer = new IntersectionObserver(
-        (entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && !hasAnimated) {
-                    hasAnimated = true;
+    close.onclick = () => {
+        ham.classList.remove("active");
+        menu.classList.remove("open");
+        ham.style.display = "flex";
+    };
+}
 
-                    // Section animation
-                    statsSection.classList.add("animate");
+/* ==============================
+   PROJECT CAROUSEL (CENTER ACTIVE)
+============================== */
+function initProjectCarousel() {
+    const track = $(".project-carousel__track");
+    const slides = $$(".project-carousel__slide");
+    const prev = $(".project-carousel__btn--prev");
+    const next = $(".project-carousel__btn--next");
+    const viewport = $(".project-carousel__viewport");
 
-                    // Counter animation
-                    animateCounter(2000); // 👈 change number here if needed
+    if (!track || !slides.length || !prev || !next || !viewport) return;
 
-                    observer.unobserve(statsSection);
-                }
-            });
-        },
-        {
-            threshold: 0.4
+    let index = 0;
+    const gap = 24;
+
+    const slideWidth = () => slides[0].offsetWidth + gap;
+
+    function visibleSlides() {
+        return Math.round(viewport.offsetWidth / slideWidth());
+    }
+
+    function maxIndex() {
+        return Math.max(slides.length - visibleSlides(), 0);
+    }
+
+    function updateButtons() {
+        prev.disabled = index === 0;
+        next.disabled = index === maxIndex();
+    }
+
+    function updateActive() {
+        slides.forEach(s => s.classList.remove("is-active"));
+
+        const centerOffset = Math.floor(visibleSlides() / 2);
+        const activeIndex = index + centerOffset;
+
+        if (slides[activeIndex]) {
+            slides[activeIndex].classList.add("is-active");
         }
-    );
+    }
 
-    observer.observe(statsSection);
-});
-document.addEventListener("DOMContentLoaded", () => {
-    const slides = document.querySelectorAll('.slide');
-    const prev = document.querySelector('.prev');
-    const next = document.querySelector('.next');
-    let index = 1;
-
-    function render() {
-        slides.forEach((slide, i) => {
-            slide.className = 'slide';
-            if (i === index) slide.classList.add('active');
-            if (i === index - 1) slide.classList.add('prev');
-            if (i === index + 1) slide.classList.add('next');
-        });
+    function update() {
+        track.style.transform = `translateX(-${index * slideWidth()}px)`;
+        updateActive();
+        updateButtons();
     }
 
     next.onclick = () => {
-        index = (index + 1) % slides.length;
-        render();
+        if (index < maxIndex()) {
+            index++;
+            update();
+        }
     };
 
     prev.onclick = () => {
-        index = (index - 1 + slides.length) % slides.length;
-        render();
+        if (index > 0) {
+            index--;
+            update();
+        }
     };
 
-    slides.forEach((slide, i) => {
-        slide.onclick = () => {
-            index = i;
-            render();
+    window.addEventListener("resize", () => {
+        index = Math.min(index, maxIndex());
+        update();
+    });
+
+    // init
+    update();
+}
+
+/* ==============================
+   STATS COUNTER
+============================== */
+function initStatsCounter() {
+    const section = $(".stats-banner");
+    const counter = $("#counter");
+
+    if (!section || !counter) return;
+
+    let started = false;
+
+    const animate = target => {
+        let start = 0;
+        const duration = 1200;
+        const startTime = performance.now();
+
+        const step = now => {
+            const progress = Math.min((now - startTime) / duration, 1);
+            counter.textContent = Math.floor(progress * target);
+            progress < 1 ? requestAnimationFrame(step) : counter.textContent = target;
         };
-    });
 
-    render();
-});
+        requestAnimationFrame(step);
+    };
+
+    new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting && !started) {
+            started = true;
+            section.classList.add("animate");
+            animate(2000);
+        }
+    }, { threshold: 0.4 }).observe(section);
+}
+
+/* ==============================
+   BOOTSTRAP
+============================== */
 document.addEventListener("DOMContentLoaded", () => {
-    const cards = document.querySelectorAll('.carousel-card');
-    const prevBtn = document.querySelector('.carousel-btn.prev');
-    const nextBtn = document.querySelector('.carousel-btn.next');
-
-    let activeIndex = 1;
-
-    function updateCarousel() {
-        cards.forEach((card, index) => {
-            card.classList.remove('prev', 'active', 'next');
-
-            if (index === activeIndex) {
-                card.classList.add('active');
-            } else if (index === activeIndex - 1) {
-                card.classList.add('prev');
-            } else if (index === activeIndex + 1) {
-                card.classList.add('next');
-            }
-        });
-    }
-
-    nextBtn.addEventListener('click', () => {
-        activeIndex = (activeIndex + 1) % cards.length;
-        updateCarousel();
-    });
-
-    prevBtn.addEventListener('click', () => {
-        activeIndex = (activeIndex - 1 + cards.length) % cards.length;
-        updateCarousel();
-    });
-
-    updateCarousel();
+    initHeroSlider();
+    initLogoScroll();
+    initAboutCarousel();
+    initPopupForm();
+    initMobileMenu();
+    initProjectCarousel();
+    initStatsCounter();
 });
