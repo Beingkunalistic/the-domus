@@ -2211,4 +2211,8 @@ body>section.amenities-section>div>div.amenities-center>div>div:nth-child(1)>img
     label {
         font-size: 18px;
     }
+
+    .send-btn {
+        width: 100%;
+    }
 }
