@@ -399,11 +399,18 @@ function initProjectCarousel() {
 
     let activeIndex = 1; // start from middle slide
 
-    const gap = 24;
-
-    function slideWidth() {
-        return slides[0].offsetWidth + gap;
+    // const gap = 24;
+    function getGap() {
+        return window.innerWidth > 768 ? 24 : 0;
     }
+    function slideWidth() {
+        return slides[0].offsetWidth + getGap();
+    }
+
+
+    // function slideWidth() {
+    //     return slides[0].offsetWidth + gap;
+    // }
 
     function centerSlide(index) {
 
@@ -465,6 +472,62 @@ function initProjectCarousel() {
     update();
 }
 
+
+function initMobileCarousel() {
+
+    if (window.innerWidth > 768) return;
+
+    const trackMobile = document.querySelector(".mobile-carousel__track");
+    const slidesMobile = document.querySelectorAll(".mobile-carousel__item");
+    const prevMobile = document.querySelector(".mobile-carousel__arrow--prev");
+    const nextMobile = document.querySelector(".mobile-carousel__arrow--next");
+
+    const titleMobile = document.getElementById("mobileProjectTitle");
+    const linkMobile = document.getElementById("mobileProjectLink");
+
+    if (!trackMobile || !slidesMobile.length) return;
+
+    let mobileIndex = 0;
+
+    function updateMobileCarousel() {
+
+        trackMobile.style.transform =
+            `translateX(-${mobileIndex * 100}%)`;
+
+        const activeSlide = slidesMobile[mobileIndex];
+
+        if (activeSlide) {
+            const newTitle = activeSlide.dataset.title;
+            const newLink = activeSlide.dataset.link;
+
+            if (titleMobile) titleMobile.textContent = newTitle;
+            if (linkMobile) linkMobile.setAttribute("href", newLink);
+        }
+
+        prevMobile.disabled = mobileIndex === 0;
+        nextMobile.disabled = mobileIndex === slidesMobile.length - 1;
+    }
+
+    nextMobile.addEventListener("click", () => {
+        if (mobileIndex < slidesMobile.length - 1) {
+            mobileIndex++;
+            updateMobileCarousel();
+        }
+    });
+
+    prevMobile.addEventListener("click", () => {
+        if (mobileIndex > 0) {
+            mobileIndex--;
+            updateMobileCarousel();
+        }
+    });
+
+    updateMobileCarousel();
+}
+
+document.addEventListener("DOMContentLoaded", initMobileCarousel);
+
+
 /* ==============================
    BOOTSTRAP
 ============================== */
@@ -479,4 +542,5 @@ document.addEventListener("DOMContentLoaded", () => {
     initStatsCounter();
     initStatsCounter2();
     initProjectCarousel();
+    initMobileCarousel();
 });
