@@ -209,6 +209,7 @@ function initMobileMenu() {
     const ham = $(".hamburger");
     const mobileMenu = $(".mobile-menu");
     const mobileClose = $(".mobile-close");
+    const men = $("#logo")
 
     if (!ham || !mobileMenu || !mobileClose) return;
 
@@ -216,12 +217,14 @@ function initMobileMenu() {
         ham.classList.toggle("active");
         mobileMenu.classList.toggle("open");
         ham.style.display = "none";
+        men.style.zIndex = "300";
     });
 
     mobileClose.addEventListener("click", () => {
         ham.classList.remove("active");
         mobileMenu.classList.remove("open");
         ham.style.display = "flex";
+        men.style.zIndex = "1500";
     });
 }
 

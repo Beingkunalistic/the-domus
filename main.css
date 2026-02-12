@@ -249,7 +249,8 @@ a {
 
 @media (max-width: 520px) {
     #logo {
-        width: 180px;
+        width: 370px;
+        z-index: 1201;
     }
 
     .dots {
@@ -660,6 +661,7 @@ a {
     background-repeat: no-repeat;
     background-position: bottom;
     background-size: cover;
+    overflow-x: hidden;
 }
 
 .footer-inner {
@@ -2392,7 +2394,7 @@ body>section.amenities-section>div>div.amenities-center>div>div:nth-child(1)>img
     }
 
     .site-header {
-        height: 120px;
+        height: 70px;
     }
 
     /* PROJECT CAROUSEL */
@@ -2502,6 +2504,14 @@ body>section.amenities-section>div>div.amenities-center>div>div:nth-child(1)>img
         cursor: not-allowed;
     }
 
+    .nav-left {
+        display: flex;
+    }
+
+    .mobile-menu.open {
+        left: 0%;
+    }
+
 }
 
 @media (max-width: 768px) {
@@ -2522,4 +2532,8 @@ body>section.amenities-section>div>div.amenities-center>div>div:nth-child(1)>img
         height: auto;
     }
 
+}
+
+section {
+    overflow-x: hidden;
 }
