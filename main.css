@@ -2086,7 +2086,7 @@ body>section.amenities-section>div>div.amenities-center>div>div:nth-child(1)>img
     }
 
     .stats-bg-mobile {
-        width: 350px;
+        width: 100%;
     }
 
     .stats-bg-mobile-30 {
@@ -2095,6 +2095,14 @@ body>section.amenities-section>div>div.amenities-center>div>div:nth-child(1)>img
 
     .stats-badge {
         position: static;
+    }
+
+    .gallery-heading {
+        text-align: center;
+    }
+
+    .gallery-carousel-wrapper {
+        width: 78vw;
     }
 
     /* ABOUT US PAGE */

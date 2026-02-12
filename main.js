@@ -927,6 +927,38 @@ function initStatsCounter() {
     observer.observe(section);
 }
 
+function initStatsCounter2() {
+    const section2 = $(".stats-banner-mobile");
+    const counterEl2 = $("#counter-mobile");
+
+    if (!section2 || !counterEl2) return;
+
+    let start2 = 0;
+    const end2 = 2000;
+    const duration2 = 1200;
+    const step2 = end2 / (duration2 / 16);
+
+    function runCounter() {
+        start2 += step2;
+        if (start2 < end2) {
+            counterEl2.innerText = Math.floor(start2);
+            requestAnimationFrame(runCounter);
+        } else {
+            counterEl2.innerText = end2;
+        }
+    }
+
+    const observer = new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting) {
+            section2.classList.add("animate");
+            runCounter();
+            observer.disconnect();
+        }
+    }, { threshold: 0.4 });
+
+    observer.observe(section2);
+}
+
 /* ==============================
    PROJECT CAROUSEL (KEEP NEW WORKING VERSION)
 ============================== */
@@ -1007,5 +1039,6 @@ document.addEventListener("DOMContentLoaded", () => {
     initMobileMenu();
     initSectionAnimations();
     initStatsCounter();
+    initStatsCounter2();
     initProjectCarousel();
 });
