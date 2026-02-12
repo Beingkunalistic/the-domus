@@ -693,6 +693,7 @@ function initLogoScroll() {
     const logo = $("#logo");
     const hero = $("#hero");
     const header = $("header");
+    console.log("Logo scroll initialized");
 
     if (!logo || !hero || !header) return;
 
@@ -702,6 +703,7 @@ function initLogoScroll() {
     function updateLogoPosition() {
         const heroRect = hero.getBoundingClientRect();
         const headerHeight = header.offsetHeight;
+        console.log("scrolling", hero.getBoundingClientRect().top);
 
         const triggerDistance = heroRect.height / 2 - headerHeight;
         let progress = Math.min(Math.max((0 - heroRect.top) / triggerDistance, 0), 1);
@@ -927,37 +929,37 @@ function initStatsCounter() {
     observer.observe(section);
 }
 
-function initStatsCounter2() {
-    const section2 = $(".stats-banner-mobile");
-    const counterEl2 = $("#counter-mobile");
+// function initStatsCounter2() {
+//     const section2 = $(".stats-banner-mobile");
+//     const counterEl2 = $("#counter-mobile");
 
-    if (!section2 || !counterEl2) return;
+//     if (!section2 || !counterEl2) return;
 
-    let start2 = 0;
-    const end2 = 2000;
-    const duration2 = 1200;
-    const step2 = end2 / (duration2 / 16);
+//     let start2 = 0;
+//     const end2 = 2000;
+//     const duration2 = 1200;
+//     const step2 = end2 / (duration2 / 16);
 
-    function runCounter() {
-        start2 += step2;
-        if (start2 < end2) {
-            counterEl2.innerText = Math.floor(start2);
-            requestAnimationFrame(runCounter);
-        } else {
-            counterEl2.innerText = end2;
-        }
-    }
+//     function runCounter() {
+//         start2 += step2;
+//         if (start2 < end2) {
+//             counterEl2.innerText = Math.floor(start2);
+//             requestAnimationFrame(runCounter);
+//         } else {
+//             counterEl2.innerText = end2;
+//         }
+//     }
 
-    const observer = new IntersectionObserver(entries => {
-        if (entries[0].isIntersecting) {
-            section2.classList.add("animate");
-            runCounter();
-            observer.disconnect();
-        }
-    }, { threshold: 0.4 });
+//     const observer = new IntersectionObserver(entries => {
+//         if (entries[0].isIntersecting) {
+//             section2.classList.add("animate");
+//             runCounter();
+//             observer.disconnect();
+//         }
+//     }, { threshold: 0.4 });
 
-    observer.observe(section2);
-}
+//     observer.observe(section2);
+// }
 
 /* ==============================
    PROJECT CAROUSEL (KEEP NEW WORKING VERSION)
@@ -1039,6 +1041,6 @@ document.addEventListener("DOMContentLoaded", () => {
     initMobileMenu();
     initSectionAnimations();
     initStatsCounter();
-    initStatsCounter2();
+    // initStatsCounter2();
     initProjectCarousel();
 });

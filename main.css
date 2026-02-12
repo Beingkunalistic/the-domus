@@ -10,7 +10,6 @@ body {
     height: 100%;
     font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     -webkit-font-smoothing: antialiased;
-    overflow-x: hidden !important;
 }
 
 a {
@@ -250,7 +249,7 @@ a {
 
 @media (max-width: 520px) {
     #logo {
-        width: 180px;
+        width: 120px;
     }
 
     .dots {
