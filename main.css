@@ -2041,6 +2041,10 @@ body>section.amenities-section>div>div.amenities-center>div>div:nth-child(1)>img
 
 @media screen and (max-width: 600px) {
 
+    body {
+        overflow-x: hidden;
+    }
+
     /* HOMEPAGE CSS */
     .about-vertical {
         display: none;
@@ -2168,5 +2172,43 @@ body>section.amenities-section>div>div.amenities-center>div>div:nth-child(1)>img
 
     .legacy-section {
         display: none;
+    }
+
+    /* CONTACT US */
+    .contact-info {
+        display: none;
+    }
+
+    .contact-heading h1 {
+        font-size: 45px;
+    }
+
+    .contact-heading p {
+        font-size: 22px;
+    }
+
+    .contact-heading {
+        margin-top: 50px;
+    }
+
+    .contact-form {
+        width: 100%;
+    }
+
+    .contact-container {
+        padding: 28px;
+    }
+
+    .contact-form h2 {
+        font-size: 30px;
+        text-align: center;
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+
+    label {
+        font-size: 18px;
     }
 }
