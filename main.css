@@ -250,7 +250,7 @@ a {
 
 @media (max-width: 520px) {
     #logo {
-        width: 120px;
+        width: 180px;
     }
 
     .dots {
@@ -2275,6 +2275,7 @@ body>section.amenities-section>div>div.amenities-center>div>div:nth-child(1)>img
         text-align: left;
         font-size: 16px;
         margin-bottom: 10px;
+        padding-right: 10px;
     }
 
     .about-btn {
