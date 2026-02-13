@@ -2682,6 +2682,16 @@ body>section.amenities-section>div>div.amenities-center>div>div:nth-child(1)>img
         left: 0%;
     }
 
+    .footer-inner {
+        flex-direction: column-reverse;
+        justify-content: center;
+        height: 100%;
+        align-items: center;
+    }
+
+    .footer-right {
+        flex-direction: column;
+    }
 }
 
 @media (max-width: 768px) {
