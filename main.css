@@ -2190,6 +2190,10 @@ body>section.amenities-section>div>div.amenities-center>div>div:nth-child(1)>img
     }
 }
 
+.desk-mobi {
+    display: none;
+}
+
 /* MOBILE */
 @media (max-width: 768px) {
 
@@ -2223,6 +2227,14 @@ body>section.amenities-section>div>div.amenities-center>div>div:nth-child(1)>img
     /* HOMEPAGE CSS */
     .about-vertical {
         display: none;
+    }
+
+    .desk-vid {
+        display: none;
+    }
+
+    .desk-mobi {
+        display: block;
     }
 
     .about-section {
