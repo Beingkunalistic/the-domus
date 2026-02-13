@@ -31,8 +31,8 @@
                 <button class="mobile-close">&times;</button>
                 <ul>
                     <li><a href="/index.html">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Projects</a></li>
+                    <li><a href="/about.html">About</a></li>
+                    <li><a href="/projects.html">Projects</a></li>
                     <li><a href="/contact.html">Contact</a></li>
                 </ul>
             </div>
@@ -93,7 +93,7 @@
                     elevated living.
                 </p>
 
-                <button class="about-btn">
+                <button class="about-btn" id="openBrochure">
                     Download Brochure <img src="assets/arrow.png" style="width: 7px; margin-left: 5px;">
                 </button>
             </div>
@@ -308,8 +308,8 @@
                     <h3>Explore</h3>
                     <ul>
                         <li><a href="/index.html">Home</a></li>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Projects</a></li>
+                        <li><a href="/about.html">About</a></li>
+                        <li><a href="/projects.html">Projects</a></li>
                         <li><a href="/contact.html">Contact</a></li>
                     </ul>
                     <h3>Get in touch</h3>
@@ -333,6 +333,49 @@
         </div>
     </footer>
 
+
+
+    <div class="brochure-modal" id="brochureModal">
+        <div class="brochure-container">
+
+            <!-- LEFT SIDE -->
+            <div class="brochure-left">
+                <h2>Get Instant Access to Our Project Brochure</h2>
+                <p class="sub-text">
+                    Fill in your details below to receive exclusive project information, floor plans, pricing and
+                    offers.
+                </p>
+
+                <form id="brochureForm">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" placeholder="Enter your Name">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Phone Number *</label>
+                        <input type="tel" id="phoneInput" required placeholder="Enter your Phone Number">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" placeholder="Enter your Email Address">
+                    </div>
+
+                    <button type="submit" class="download-btn">
+                        Download Brochure
+                    </button>
+                </form>
+            </div>
+
+            <!-- RIGHT IMAGE PANEL -->
+            <div class="brochure-right">
+                <img src="assets/pop-up.png" alt="Project Image">
+                <span class="close-modal" id="closeBrochure">✕</span>
+            </div>
+
+        </div>
+    </div>
     <script src="main.js"></script>
     <!-- <script src="scroll.js"></script> -->
     <!-- Include GSAP + ScrollTrigger -->

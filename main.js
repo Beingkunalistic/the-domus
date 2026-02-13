@@ -528,7 +528,48 @@ function initMobileCarousel() {
     updateMobileCarousel();
 }
 
-document.addEventListener("DOMContentLoaded", initMobileCarousel);
+document.addEventListener("DOMContentLoaded", function () {
+
+    const modal = document.getElementById("brochureModal");
+    const openBtn = document.getElementById("openBrochure");
+    const closeBtn = document.getElementById("closeBrochure");
+    const form = document.getElementById("brochureForm");
+
+    openBtn.addEventListener("click", () => {
+        modal.classList.add("active");
+        document.body.style.overflow = "hidden";
+    });
+
+    closeBtn.addEventListener("click", () => {
+        modal.classList.remove("active");
+        document.body.style.overflow = "auto";
+    });
+
+    modal.addEventListener("click", (e) => {
+        if (e.target === modal) {
+            modal.classList.remove("active");
+            document.body.style.overflow = "auto";
+        }
+    });
+
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const phone = document.getElementById("phoneInput").value;
+
+        if (phone.trim() === "") {
+            alert("Phone number is required.");
+            return;
+        }
+
+        // 🔥 Replace with your PDF link
+        window.open("YOUR_PDF_LINK_HERE.pdf", "_blank");
+
+        modal.classList.remove("active");
+        document.body.style.overflow = "auto";
+    });
+
+});
 
 
 /* ==============================
