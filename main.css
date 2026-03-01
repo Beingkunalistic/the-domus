@@ -313,7 +313,7 @@ a {
 }
 
 /* MOBILE MENU */
-.mobile-menu {
+/* .mobile-menu {
     position: fixed;
     top: -14px;
     left: -100%;
@@ -328,32 +328,71 @@ a {
 
 .mobile-menu.open {
     left: -11%;
+} */
+
+.mobile-menu {
+    position: fixed;
+    top: -12px;
+    left: -150%;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    transition: left 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+    z-index: 9999;
 }
 
-.mobile-menu ul {
-    list-style: none;
-    padding: 0;
-    margin: 60px 0 0;
+/* Open */
+.mobile-menu.open {
+    left: 0;
+}
+
+/* LEFT PANEL */
+.drawer-left {
+    width: 30%;
+    background: #3a0c05;
+    padding: 80px 60px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    justify-content: space-between;
+    color: white;
+    position: relative !important;
 }
 
-.mobile-menu a {
-    font-size: 20px;
-    color: #000;
-    text-decoration: none;
-}
-
-/* CLOSE BUTTON */
 .mobile-close {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 40px;
+    right: 40px;
     background: none;
     border: none;
-    font-size: 32px;
+    font-size: 28px;
+    color: white;
     cursor: pointer;
+}
+
+/* RIGHT IMAGE PANEL */
+.drawer-right {
+    width: 70%;
+    background-image: url('assets/menu-bg.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+/* MENU LIST */
+.drawer-left ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+}
+
+.drawer-left a {
+    font-size: 38px;
+    font-weight: 500;
+    color: white;
+    text-decoration: none;
+    font-family: 'Arya', sans-serif;
 }
 
 /* DESKTOP ONLY: hide hamburger */
@@ -492,6 +531,7 @@ a {
     position: relative;
     padding: 0px 0 120px 0;
     overflow-x: hidden;
+    height: auto;
 }
 
 /* HEADING */
@@ -664,12 +704,22 @@ a {
     overflow-x: hidden;
 }
 
+.domus-footer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1;
+}
+
 .footer-inner {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     max-width: 1600px;
     margin: 0 auto;
+    position: relative;
+    z-index: 2;
 }
 
 /* LEFT SIDE */
@@ -2216,12 +2266,20 @@ body>section.amenities-section>div>div.amenities-center>div>div:nth-child(1)>img
     }
 }
 
+.mobile-img {
+    display: none;
+}
+
 /* MEDIA QUERIES FOR MOBILE VERSION */
 
 @media screen and (max-width: 600px) {
 
     body {
         overflow-x: hidden;
+    }
+
+    .mobile-img {
+        display: block;
     }
 
     /* HOMEPAGE CSS */
@@ -2401,15 +2459,6 @@ body>section.amenities-section>div>div.amenities-center>div>div:nth-child(1)>img
 
     .send-btn {
         width: 100%;
-    }
-
-    /* PROJECT DETAILS PAGE */
-    .desktop-img {
-        display: block;
-    }
-
-    .mobile-img {
-        display: none;
     }
 
     .about-visual2 {
@@ -2691,6 +2740,35 @@ body>section.amenities-section>div>div.amenities-center>div>div:nth-child(1)>img
 
     .footer-right {
         flex-direction: column;
+    }
+
+    .get-in-touch {
+        display: none;
+    }
+
+    .domus-footer {
+        padding: 70px 20px;
+    }
+
+    .footer-right {
+        width: 100%;
+    }
+
+    .footer-left {
+        max-width: 100%;
+    }
+
+    .footer-logo-wrap {
+        justify-content: center;
+    }
+
+    .footer-social {
+        padding-left: 0;
+        justify-content: center;
+    }
+
+    .explore {
+        text-align: center;
     }
 }
 

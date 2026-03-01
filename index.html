@@ -20,21 +20,41 @@
     <header class="site-header" id="site-header">
         <nav class="nav" role="navigation" aria-label="Main navigation">
             <ul class="nav-left">
-                <!-- HAMBURGER BUTTON -->
                 <button class="hamburger" aria-label="Menu">
                     <span></span><span></span><span></span>
                 </button>
             </ul>
 
-            <!-- MOBILE MENU (hidden by default) -->
             <div class="mobile-menu">
-                <button class="mobile-close">&times;</button>
+                <!-- <button class="mobile-close">&times;</button>
                 <ul>
                     <li><a href="/index.html">Home</a></li>
                     <li><a href="/about.html">About</a></li>
                     <li><a href="/projects.html">Projects</a></li>
                     <li><a href="/contact.html">Contact</a></li>
-                </ul>
+                </ul> -->
+                <div class="drawer-left">
+                    <button class="mobile-close">&times;</button>
+
+                    <ul>
+                        <li><a href="/about.html">About</a></li>
+                        <li><a href="/projects.html">Projects</a></li>
+                        <li><a href="/contact.html">Contact</a></li>
+                    </ul>
+
+                    <div class="drawer-footer">
+                        <div class="footer-logo-wrap">
+                            <img src="assets/aramus-logo.png" alt="The Domus Logo" class="footer-logo">
+                        </div>
+                        <div class="footer-social">
+                            <a href="#"><img src="assets/linkedin.png" alt="LinkedIn"></a>
+                            <a href="#"><img src="assets/insta.png" alt="Instagram"></a>
+                            <a href="#"><img src="assets/facebook.png" alt="Facebook"></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="drawer-right"></div>
             </div>
 
             <!-- center anchor (empty visually) - used as landing position -->
