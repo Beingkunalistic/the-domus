@@ -2770,6 +2770,23 @@ body>section.amenities-section>div>div.amenities-center>div>div:nth-child(1)>img
     .explore {
         text-align: center;
     }
+
+    /* MENU LAYOUT */
+    .drawer-left {
+        width: 45%;
+    }
+
+    .drawer-right {
+        width: 55%;
+    }
+
+    .drawer-left {
+        padding: 80px 20px;
+    }
+
+    .drawer-left a {
+        font-size: 28px;
+    }
 }
 
 @media (max-width: 768px) {
