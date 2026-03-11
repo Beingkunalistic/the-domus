@@ -544,7 +544,6 @@ document.addEventListener("DOMContentLoaded", function () {
         modal.classList.remove("active");
         document.body.style.overflow = "auto";
     });
-
     modal.addEventListener("click", (e) => {
         if (e.target === modal) {
             modal.classList.remove("active");
@@ -587,4 +586,58 @@ document.addEventListener("DOMContentLoaded", () => {
     initStatsCounter2();
     initProjectCarousel();
     initMobileCarousel();
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    const items = document.querySelectorAll('.ugc-item');
+    const modal = document.getElementById('ugcModal');
+    const modalVideo = document.getElementById('ugcModalVideo');
+    const closeBtn = document.querySelector('.ugc-close');
+    const prevBtn = document.querySelector('.ugc-prev');
+    const nextBtn = document.querySelector('.ugc-next');
+
+    let currentIndex = 0;
+
+    const videoSources = Array.from(items).map(item => {
+        const source = item.querySelector('source');
+        return source ? source.getAttribute('src') : null;
+    });
+
+    function openModal(index) {
+        currentIndex = index;
+        modal.classList.add('active');
+        modalVideo.src = videoSources[currentIndex];
+        modalVideo.play();
+        document.body.style.overflow = "hidden";
+    }
+
+    function closeModal() {
+        modal.classList.remove('active');
+        modalVideo.pause();
+        modalVideo.src = "";
+        document.body.style.overflow = "";
+    }
+
+    function showNext() {
+        currentIndex = (currentIndex + 1) % videoSources.length;
+        modalVideo.src = videoSources[currentIndex];
+        modalVideo.play();
+    }
+
+    function showPrev() {
+        currentIndex = (currentIndex - 1 + videoSources.length) % videoSources.length;
+        modalVideo.src = videoSources[currentIndex];
+        modalVideo.play();
+    }
+
+    items.forEach((item, index) => {
+        item.addEventListener('click', () => openModal(index));
+    });
+
+    closeBtn.addEventListener('click', closeModal);
+    document.querySelector('.ugc-overlay').addEventListener('click', closeModal);
+    nextBtn.addEventListener('click', showNext);
+    prevBtn.addEventListener('click', showPrev);
+
 });
