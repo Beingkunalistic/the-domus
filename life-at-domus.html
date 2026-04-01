@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Arya:wght@400;700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Pragati+Narrow:wght@400;700&family=Rubik+Microbe&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="main.css" />
+    <title>Life at The Domus</title>
+</head>
+
+<body>
+    <header class="site-header" id="site-header">
+        <nav class="nav" role="navigation" aria-label="Main navigation">
+            <ul class="nav-left">
+                <!-- HAMBURGER BUTTON -->
+                <button class="hamburger" aria-label="Menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </ul>
+            <!-- MOBILE MENU (hidden by default) -->
+            <div class="mobile-menu">
+                <!-- <button class="mobile-close">&times;</button>
+                <ul>
+                    <li><a href="/index.html">Home</a></li>
+                    <li><a href="/about.html">About</a></li>
+                    <li><a href="/projects.html">Projects</a></li>
+                    <li><a href="/contact.html">Contact</a></li>
+                </ul> -->
+                <div class="drawer-left">
+                    <button class="mobile-close">&times;</button>
+                    <ul>
+                        <li><a href="/index.html">Home</a></li>
+                        <li><a href="/about.html">About</a></li>
+                        <li><a href="/projects.html">Projects</a></li>
+                        <li><a href="/life-at-domus.html">Life at The Domus</a></li>
+                        <li><a href="/contact.html">Contact</a></li>
+                    </ul>
+
+                    <div class="drawer-footer">
+                        <div class="footer-logo-wrap">
+                            <img src="assets/WORDMARK white copy.png" alt="The Domus Logo" class="footer-logo">
+                        </div>
+                        <div class="footer-social">
+                            <a href="#"><img src="assets/linkedin.png" alt="LinkedIn"></a>
+                            <a href="#"><img src="assets/insta.png" alt="Instagram"></a>
+                            <a href="#"><img src="assets/facebook.png" alt="Facebook"></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="drawer-right"></div>
+            </div>
+
+            <!-- center anchor (empty visually) - used as landing position -->
+            <div class="header-center-anchor" id="header-anchor" aria-hidden="true">
+                <img id="logo2" src="assets/WORDMARK white copy.png" alt="Site logo" />
+            </div>
+
+            <ul class="nav-right">
+            </ul>
+        </nav>
+    </header>
+
+
+
+    <section class="ugc-section">
+        <div class="ugc-container">
+            <h2 class="ugc-heading">Real Lives. Real Spaces.</h2>
+
+            <div class="ugc-carousel" id="ugcCarousel">
+
+                <div class="ugc-item" data-index="0">
+                    <video class="ugc-video" muted loop autoplay playsinline preload="auto">
+                        <source
+                            src="assets/Nothing speaks louder than the voice of a satisfied client! Hear what our amazing client @sabapa.mp4"
+                            type="video/mp4">
+                    </video>
+                </div>
+
+                <div class="ugc-item" data-index="1">
+                    <video class="ugc-video" muted loop autoplay playsinline preload="auto">
+                        <source
+                            src="/assets/🌟 “A Happy Homeowner’s Story” 🏡At The Domus, we take pride in turning dreams into reality. One.mp4"
+                            type="video/mp4">
+                    </video>
+                </div>
+
+                <div class="ugc-item" data-index="2">
+                    <video class="ugc-video" muted loop autoplay playsinline preload="auto">
+                        <source
+                            src="/assets/When your dream home becomes a reality. 🏡✨Hear what iamhk369 , one of our respected building me.mp4"
+                            type="video/mp4">
+                    </video>
+                </div>
+
+                <!-- <div class="ugc-item" data-index="3">
+                    <video class="ugc-video" muted loop autoplay playsinline preload="auto">
+                        <source src="video4.mp4" type="video/mp4">
+                    </video>
+                </div> -->
+
+            </div>
+        </div>
+    </section>
+    <div class="ugc-modal" id="ugcModal">
+        <div class="ugc-overlay"></div>
+        <div class="ugc-modal-content">
+            <button class="ugc-close">&times;</button>
+            <button class="ugc-prev">&#10094;</button>
+
+            <video id="ugcModalVideo" controls playsinline></video>
+
+            <button class="ugc-next">&#10095;</button>
+        </div>
+    </div>
+
+
+    <footer class="domus-footer">
+        <!-- <div class="hero-overlay2"></div> -->
+        <div class="footer-inner">
+            <!-- LEFT SIDE -->
+            <div class="footer-left">
+                <div class="footer-logo-wrap">
+                    <img src="assets/WORDMARK white copy.png" alt="The Domus Logo" class="footer-logo">
+                </div>
+                <div class="footer-social">
+                    <a href="#"><img src="assets/linkedin.png" alt="LinkedIn"></a>
+                    <a href="#"><img src="assets/insta.png" alt="Instagram"></a>
+                    <a href="#"><img src="assets/facebook.png" alt="Facebook"></a>
+                </div>
+            </div>
+            <!-- RIGHT SIDE -->
+            <div class="footer-right">
+                <div class="explore">
+                    <h3>Explore</h3>
+                    <ul>
+                        <li><a href="/index.html">Home</a></li>
+                        <li><a href="/about.html">About</a></li>
+                        <li><a href="/projects.html">Projects</a></li>
+                        <li><a href="/life-at-domus.html">Life at The Domus</a></li>
+                        <li><a href="/contact.html">Contact</a></li>
+                    </ul>
+                    <h3>Get in touch</h3>
+                    <p style="padding-bottom: 10px;"><span class="icon"><img style="width:15px"
+                                src="assets/call-footer.png"></span> +91 9372537314
+                    </p>
+                    <p style="padding-bottom: 10px;"><span class="icon"><img style="width:15px"
+                                src="assets/mail-footer.png"></span> abc@gmail.com</p>
+                    <p><span class="icon"><img style="width:10px" src="assets/location-footer.png"></span> Seawoods,
+                        Navi Mumbai</p>
+                </div>
+                <div class="get-in-touch" style="visibility: hidden;">
+                    <h3>Get in touch</h3>
+                    <p><span class="icon">📞</span> +91 9XXXX XXXXX</p>
+                    <p><span class="icon">✉️</span> abc@gmail.com</p>
+                    <p><span class="icon">📍</span> Seawoods, Navi Mumbai</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="main.js"></script>
+    <!-- <script src="scroll.js"></script> -->
+    <!-- Include GSAP + ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</body>
+
+</html>
